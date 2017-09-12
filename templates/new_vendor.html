@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block head %}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Vendor</h1>
+    <hr/>
+    <form id="add_vendor_form" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{% url 'add_vendor' %}">{% csrf_token %}
+    {% for field in form %}
+    <div class="form-group row">
+            <label class="control-label col-sm-4" for="{{ field.name }}">{{ field.label }}</label>
+            <div class="col-sm-8">
+                {{ field }}
+            </div>
+
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+    </div>
+    <div class="form-group row error controls">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-8">
+            <span class="help-inline" style="color:red;">{{ field.errors.as_text  }}</span>
+        </div>
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary float-sm-right">Add vendor</button>
+    
+    </form>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}
