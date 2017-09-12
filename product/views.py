@@ -10,7 +10,6 @@ def add_product( request ):
     product_form = ProductForm()
     price_product_form = PriceProductForm()
     if request.method == "POST":
-        print request.FILES
         product_form = ProductForm(request.POST, request.FILES)
         price_product_form = PriceProductForm(request.POST, request.FILES)
         if product_form.is_valid() and price_product_form.is_valid():

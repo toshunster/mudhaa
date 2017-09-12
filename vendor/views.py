@@ -8,7 +8,6 @@ from vendor.models import VendorForm
 def add_vendor( request ):
     form = VendorForm()
     if request.method == "POST":
-        print request.FILES
         form = VendorForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()

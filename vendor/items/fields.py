@@ -113,7 +113,6 @@ class ThumbnailImageFieldFile(ImageFieldFile):
     img.save(self.thumb_path, **png_info)
     
   def delete(self, save=True):
-    print "ahahaha"
     if os.path.exists(self.thumb_path):
       os.remove(self.thumb_path)
     super(ThumbnailImageFieldFile, self).delete(save)
