@@ -78,19 +78,19 @@ WSGI_APPLICATION = 'mudhaa.wsgi.application'
 # Update database configuration with $DATABASE_URL.
 import dj_database_url
 db_from_env = dj_database_url.config()
-DATABASES = dict()
-DATABASES['default'].update(db_from_env)
 
-#DATABASES = {  
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'mudhaa_db',
-#        'USER': 'kukhtichev',
-#        'PASSWORD': '1234567',
-#        'HOST': 'localhost',
-#        'PORT': '5432',
-#    }
-#}
+DATABASES = {  
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
