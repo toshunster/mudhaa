@@ -84,6 +84,12 @@ class Subcategory(models.Model):
     def __unicode__(self):
         return u"%s" % self.name
 
+class CategoryAdmin(admin.ModelAdmin):
+  list_display = ('name',)
+
+class SubcategoryAdmin(admin.ModelAdmin):
+  list_display = ('name', 'category',)
+
 class SubcategoryForm(ModelForm):
     class Meta:
         model = Subcategory
@@ -122,6 +128,10 @@ class Product(models.Model):
     type_or_user = models.ForeignKey( TypeOrUser, blank = True, null = True )
     retail_unit_price = models.FloatField( default=0.0 )
 
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'subcategory', 'brand')
+
+
 class ProductForm( ModelForm ):
     class Meta:
         model = Product
@@ -151,3 +161,10 @@ class ProductForm2( ModelForm ):
         self.fields['packing'].empty_label = "Select packing"
         self.fields['brand'].empty_label = "Select brand"
         self.fields['country'].empty_label = "Select country"
+
+try:
+    admin.site.register(Subcategory, SubcategoryAdmin)
+    admin.site.register(Category, CategoryAdmin)
+    admin.site.register(Product, ProductAdmin)
+except:
+    pass

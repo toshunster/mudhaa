@@ -63,4 +63,15 @@ class PriceProductForm(ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs.update({'class' : 'form-control'})
         self.fields['vendor'].empty_label = "Select vendor"
-    
+
+class VendorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'address')
+
+class PriceProductAdmin(admin.ModelAdmin):
+    list_display = ('vendor', 'product', 'price')
+
+try:
+    admin.site.register(Vendor, VendorAdmin)
+    admin.site.register(PriceProduct, PriceProductAdmin)
+except:
+    pass
