@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 
-from product.models import ProductForm, Category
+from product.models import ProductForm, Category, Subcategory
 from vendor.models import PriceProductForm
 
 def add_product( request ):
@@ -28,9 +28,8 @@ def get_subcategory( request ):
     # html page of the form
     form_template='subcategory_template.html'
     response_dic = dict()
-    print( "ahaha", request )
+    subcategories = Subcategory.objects.all()
     if request.method == 'POST':
-        print( request.POST )
         if 'category' in request.POST:
             category_id = request.POST['category']
             subcateogies = list()
@@ -39,7 +38,6 @@ def get_subcategory( request ):
             except Exception as e:
                 print("ERROR: {0}".format(str(e)))
                 return ""
-            response_dic['subcategories'] = category.subcategory_set.all()
-
-            return HttpResponse(render_to_string(form_template, response_dic, RequestContext(request)))
-    return ""
+            subcategories = category.subcategory_set.all()
+    response_dic['subcategories'] = subcategories
+    return HttpResponse(render_to_string(form_template, response_dic, RequestContext(request)))
