@@ -87,3 +87,24 @@
     
 </div>
 {% endblock %}
+{% block additional_post_scripts %}
+{% load static %}
+<script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+<script>
+function ChangeCategoryEmpty()
+{
+    var category_key = "#category_id";
+    var subcategory_key = "#subcategory_id";
+    subcategory_value = $(category_key).find('option:selected').val();
+    $.ajax({
+        type: "POST",
+        url: "{% url 'get_subcategory' %}",
+        dataType: 'html',
+        data: {'category' : subcategory_value.toString() },
+        success: function(result) {
+            $(subcategory_key).html(result);
+        }
+    });
+}
+</script>
+{% endblock %}

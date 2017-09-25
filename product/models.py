@@ -88,7 +88,7 @@ class CategoryAdmin(admin.ModelAdmin):
   list_display = ('name',)
 
 class SubcategoryAdmin(admin.ModelAdmin):
-  list_display = ('name', 'category',)
+  list_display = ('name', )
 
 class SubcategoryForm(ModelForm):
     class Meta:
@@ -142,7 +142,10 @@ class ProductForm( ModelForm ):
         for field in self.fields:
             self.fields[field].widget.attrs.update({'class' : 'form-control'})
         self.fields['category'].empty_label = "Select category"
+        self.fields['category'].widget.attrs['id'] = 'category_id'
+        self.fields['category'].widget.attrs['onchange'] = 'ChangeCategoryEmpty();'
         self.fields['subcategory'].empty_label = "Select subcategory"
+        self.fields['subcategory'].widget.attrs['id'] = 'subcategory_id'
         self.fields['packing'].empty_label = "Select packing"
         self.fields['brand'].empty_label = "Select brand"
         self.fields['country'].empty_label = "Select country"
