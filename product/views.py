@@ -35,9 +35,8 @@ def get_subcategory( request ):
             subcateogies = list()
             try:
                 category = Category.objects.get(id=int(category_id))
+                subcategories = category.subcategory_set.all()
             except Exception as e:
-                print("ERROR: {0}".format(str(e)))
-                return ""
-            subcategories = category.subcategory_set.all()
+                subcategories = Subcategory.objects.all()
     response_dic['subcategories'] = subcategories
     return HttpResponse(render_to_string(form_template, response_dic, RequestContext(request)))
