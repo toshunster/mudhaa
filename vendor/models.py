@@ -17,17 +17,17 @@ class Vendor(models.Model):
     """Country model class"""
 
     name = models.CharField(max_length=60)
-    address = models.CharField(max_length=360)
-    tin = models.CharField(max_length=60)
-    contact_number = models.CharField(max_length=20)
-    fax_number = models.CharField(max_length=20)
-    email = models.CharField(max_length=30)
-    website = models.CharField(max_length=120)
-    fb_page = models.CharField(max_length=120)
-    twitter = models.CharField(max_length=120)
-    instagram = models.CharField(max_length=120)
+    address = models.CharField(max_length=360, blank=True, null=True )
+    tin = models.CharField(max_length=60, blank=True, null=True )
+    contact_number = models.CharField(max_length=20, blank=True, null=True )
+    fax_number = models.CharField(max_length=20, blank=True, null=True )
+    email = models.CharField(max_length=30, blank=True, null=True )
+    website = models.CharField(max_length=120, blank=True, null=True )
+    fb_page = models.CharField(max_length=120, blank=True, null=True )
+    twitter = models.CharField(max_length=120, blank=True, null=True )
+    instagram = models.CharField(max_length=120, blank=True, null=True )
     country = models.ForeignKey(Country, blank=True, null=True)
-    contact_person = models.CharField(max_length=60)
+    contact_person = models.CharField(max_length=60, blank=True, null=True )
     logo = ThumbnailImageField(thumb_width=200, blank = True, null = True, storage=MyFileSystemStorage(), upload_to='logos/')
     
     def __str__(self):
